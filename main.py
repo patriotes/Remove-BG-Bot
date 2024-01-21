@@ -208,7 +208,7 @@ async def remove_background(bot, update):
         except:
             pass
     except Exception as error:
-        await message.edit_text(
+         message.edit_text(
             text=error,
             disable_web_page_preview=True
         )
