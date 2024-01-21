@@ -208,7 +208,13 @@ async def remove_background(bot, update):
         except:
             pass
     except Exception as error:
-         message.edit_text(
+   def my_function():
+    message = "Hello, world!"  # Initialize the variable
+    print(message)  # Access the variable
+
+my_function()
+        
+        message.edit_text(
             text=error,
             disable_web_page_preview=True
         )
