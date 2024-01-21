@@ -165,7 +165,9 @@ async def remove_background(bot, update):
             reply_markup=ERROR_BUTTONS
         )
         return
-    await update.reply_chat_action("typing")
+    File "/app/main.py", line 168, in remove_background
+await update.reply_chat_action("typing")
+
     message = await update.reply_text(
         text="Processing",
         quote=True,
