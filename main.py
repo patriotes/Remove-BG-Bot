@@ -189,8 +189,10 @@ async def remove_background(bot, update):
         )
     finally:
         await message.delete()
-            update.photo or (
-        update.document and "image" in update.document.mime_type )
+            (update.photo or (
+    update.document and "image" in update.document.mime_type
+))
+
         ):
             new_file_name += ".png"
             file = await update.download()
