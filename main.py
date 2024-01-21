@@ -209,9 +209,10 @@ async def remove_background(bot, update):
             pass
     except Exception as error:
         await message.edit_text(
-            text=error,
-            disable_web_page_preview=True
-        )
+        text=error,  # Replace `error` with the actual error message
+        disable_web_page_preview=True
+    )
+
     try:
         with open(new_file_name, "wb") as file:
             file.write(new_document.content)
