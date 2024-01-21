@@ -166,31 +166,30 @@ async def remove_background(bot, update):
         )
         return
     await update.reply_chat_action("typing")
-    await update.reply_chat_action("typing")
     message = await update.reply_text(
-        text="Processing...",
+        text="Processing",
         quote=True,
         disable_web_page_preview=True
     )
     try:
         new_file_name = f"./{str(update.from_user.id)}"
-        if (condition):
-            # Code to be executed if condition is true
-            pass
-        else:
-            # Code to be executed if condition is false
-            pass
-    except Exception as e:
-        # Handle the exception
-        await update.reply_text(
-            text="An error occurred while processing.",
-            quote=True,
-            disable_web_page_preview=True
-        )
-    finally:
-        await message.delete()
-           (( update.photo ) or
-    update.document and "i )) :
+        if (
+            update.photo or (
+                update.document and "image" in update.document.mime_type
+            )
+        ):
+            new_file_name += ".png"
+            file = await update.download()
+            await message.edit_text(
+                text="Photo downloaded successfully. Now removing background.",
+                disable_web_page_preview=True
+            )
+            new_document = removebg_image(file)
+        elif (
+            update.video or (
+                update.document and "video" in update.document.mime_type
+            )
+        ):
             new_file_name += ".webm"
             file = await update.download()
             await message.edit_text(
