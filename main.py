@@ -190,22 +190,7 @@ async def remove_background(bot, update):
     finally:
         await message.delete()
             (update.photo or (
-    update.document and "image" in update.document.mime_type
-))
-
-        ):
-            new_file_name += ".png"
-            file = await update.download()
-            await message.edit_text(
-                text="Photo downloaded successfully. Now removing background.",
-                disable_web_page_preview=True
-            )
-            new_document = removebg_image(file)
-        elif (
-            update.video or (
-                update.document and "video" in update.document.mime_type
-            )
-        ):
+    update.document and "i):
             new_file_name += ".webm"
             file = await update.download()
             await message.edit_text(
