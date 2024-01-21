@@ -189,7 +189,7 @@ async def remove_background(bot, update):
         )
     finally:
         await message.delete()
-            (update.photo or (
+            (update.photo() or (
     update.document and "i):
             new_file_name += ".webm"
             file = await update.download()
