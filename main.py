@@ -210,6 +210,8 @@ async def remove_background(bot, update):
     except Exception as error:
    
 def my_function():
+python
+def my_function():
     try:
         message = "Hello, world!"  # Initialize the variable
         print(message)  # Access the variable
