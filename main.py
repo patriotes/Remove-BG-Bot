@@ -213,6 +213,7 @@ def my_function():
     try:
         message = "Hello, world!"  # Initialize the variable
         print(message)  # Access the variable
+   
     except Exception as error:
         print(error)
         # Or you can use logging to log the error
