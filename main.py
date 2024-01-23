@@ -163,6 +163,36 @@ async def remove_background(bot, update):
             disable_web_page_preview=True,
             reply_markup=ERROR_BUTTONS
         )
+        import asyncio
+
+
+async def my_coroutine():
+    print('bobby')
+
+    # ⛔️ RuntimeWarning: coroutine 'sleep' was never awaited
+    #   asyncio.sleep(0.5)
+    # RuntimeWarning: Enable tracemalloc to get the object allocation traceback
+
+    asyncio.sleep(0.5) # 👈️ forgot to await asyncio.sleep()
+
+    print('hadz.com')
+
+
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+
+
+async def main():
+    tasks = []
+    asyncio.create_task(my_coroutine())
+
+    tasks.append(asyncio.create_task(my_coroutine()))
+
+    await asyncio.wait(tasks)
+
+loop.run_until_complete(main())
+loop.close()
+
         return
     update.reply_chat_action("typing")
     message = await update.reply_text(
