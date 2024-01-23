@@ -1,10 +1,9 @@
- 
 import os
 import requests
 from dotenv import load_dotenv
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-import asyncio
+
 
 load_dotenv()
 
@@ -20,7 +19,7 @@ Bot = Client(
 
 START_TEXT = """Hello {},
 I am a media background remover bot. \
-Send me a photo and I will send you the photo without background.
+Send me a photo I will send the photo without background.
 
 Made by @FayasNoushad"""
 
@@ -34,7 +33,7 @@ Made by @FayasNoushad"""
 
 ABOUT_TEXT = """**About Me**
 
-- **Bot :** `Background Remover Bot`
+- **Bot :** `Backround Remover Bot`
 - **Developer :** [Fayas](https://github.com/FayasNoushad)
 - **Channel :** [Fayas Noushad](https://telegram.me/FayasNoushad)
 - **Source :** [Click here](https://github.com/FayasNoushad/Remove-BG-Bot)
@@ -106,7 +105,7 @@ async def cb_data(bot, update):
 
 @Bot.on_message(filters.private & filters.command(["start"]))
 async def start(bot, update, cb=False):
-    text = START_TEXT.format(update.from_user.mention)
+    text=START_TEXT.format(update.from_user.mention)
     if cb:
         await update.message.edit_text(
             text=text,
@@ -160,13 +159,12 @@ async def about(bot, update, cb=False):
 async def remove_background(bot, update):
     if not (REMOVEBG_API or UNSCREEN_API):
         await update.reply_text(
-            text="Error: API not found",
+            text="Error :- API not found",
             quote=True,
             disable_web_page_preview=True,
             reply_markup=ERROR_BUTTONS
         )
         return
-
     await update.reply_chat_action("typing")
     message = await update.reply_text(
         text="Processing",
@@ -205,25 +203,23 @@ async def remove_background(bot, update):
                 disable_web_page_preview=True,
                 reply_markup=ERROR_BUTTONS
             )
-            return
         try:
             os.remove(file)
         except:
             pass
     except Exception as error:
         await message.edit_text(
-            text=str(error),
+            text=error,
             disable_web_page_preview=True
         )
-        return
     try:
         with open(new_file_name, "wb") as file:
             file.write(new_document.content)
         await update.reply_chat_action("upload_document")
     except Exception as error:
         await message.edit_text(
-            text=str(error),
-            reply_markup=ERROR_BUTTONS
+           text=error,
+           reply_markup=ERROR_BUTTONS
         )
         return
     try:
@@ -237,7 +233,7 @@ async def remove_background(bot, update):
             pass
     except Exception as error:
         await message.edit_text(
-            text=f"Error: {error}",
+            text=f"Error:- `{error}`",
             disable_web_page_preview=True,
             reply_markup=ERROR_BUTTONS
         )
@@ -259,26 +255,5 @@ def removebg_video(file):
         headers={"X-Api-Key": UNSCREEN_API}
     )
 
-
-async def my_coroutine():
-    print('bobby')
-    await asyncio.sleep(0.5)
-    print('hadz.com')
-
-
-loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
-
-
-async def main():
-    tasks = []
-    asyncio.create_task(my_coroutine())
-
-    tasks.append(asyncio.create_task(my_coroutine()))
-
-    await asyncio.wait(tasks)
-
-loop.run_until_complete(main())
-loop.close()
 
 Bot.run()
