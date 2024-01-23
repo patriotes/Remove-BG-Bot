@@ -193,6 +193,8 @@ async def main():
 loop.run_until_complete(main())
 loop.close()
 
+(
+    
         return
     update.reply_chat_action("typing")
     message = await update.reply_text(
